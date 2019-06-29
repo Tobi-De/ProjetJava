@@ -1,0 +1,109 @@
+	Conventions de Nommage
+
+Dans le fichier QuiAFaitQuoi vous allez retrouvez les references des sites d'ou les convention et conseils ont ete tires.
+Tous les noms doivent etre en anglais, que ce soit les variables, les constantes, les fonctions, les
+packages,... absolument tout.
+
+  *Packages
+Tout en miniscules, doit comporter uniquement des lettres, des chiffres et le caractes "." .
+Nous nommerons nos packages comme ceci com.interface.xxx par exemple.
+Nous commencerons toujours par com.interface(ou controller pour les classes metier).(ensuite le nom du pacakges).
+
+  *Classes
+Nous utiliserons le CamelCase, premiere lettre en majuscule, le reste en miniscule une majuscule a chaque debut de mot.
+Le oms doit etres simple et descripptif, une classe qui gerer une banque doit S'appeler Bank (En anglais n'oubliez pas).
+Pas d'acronymes(ex: BATD, les sigles en gros).
+
+  *Interfaces
+Meme convention que pour les classes.
+
+  *Variables
+Premiere lettre en miniscule, a chaque debut de mot une majuscule.
+Noms simple et descriptifs.
+Dans le cas de parametres d'une fonctions utiliser l'undescore lorsque le nom est en plusier mot "_". 
+Ex: client_name: uniquement pour les noms de parametres, la majuscule au debut de chauqe caractere n'est plus necessaires.
+    clientName: lorsque la variables est n'importe ou d'autres dans le programme(sauf pour les constantes, voir la section
+    les concernants)
+
+NB: le prof l'a precise dans le projet, mais je le reecrit ici, pas de variable globale, ils doivent tous etres locale a une fonction.
+
+  *Constantes
+Tout en majuscule.
+Separer les mots par des underscore "_".
+Noms simple et descriptif.
+Ex: static final int MIN_WIDTH = 4;
+
+  *Nom des fichier jar
+Tout en minuscule
+Séparer les mots par un tiret '-'.
+Utiliser seulement les lettres [a-z], [0-9] et '-' , Ne pas utiliser d'underscore '_' ou d'autres caractères ($, accents, ...).
+
+Ex: gb-fwk-1.0.jar.
+
+  *Fonctions
+Premiere lettre en miniscule, a chaque debut de mot une majuscule.
+Noms simple et descriptifs.
+
+	
+
+
+	Aides/Regles Supplementaires
+
+- Faire le plus de fonctions possible pour rendre le code plus modulaire.
+- Priviliegier l'utilisation de booleens pour les verifications et le polymorphisme au detriment des switch et des conditions.
+- Nos fonctions doivent faire en moyenne 5 lignes, au grand max 10 lignes, faite l'effort de n'ecrire aucune fonction de plus de 10 lignes.
+- Toute les fonctions n'ont pas besoin d'avoir un commentaire associe, ajouter des commentaire seulement quand la fonctions realise
+une operation complexe, Par contre il faut un commentaire au debut de la creation de chaque classe.
+
+   *Commment et Quand Ecrire les commentaire qui vont servir dans la generation de la JavaDoc
+
+Les commentaires sont encadre de cette facon /**.....*/, a chaque nouvelle ligne on met une etoile devant.
+Le commentaire n'a pas besoin d'etre exhaustif, la premier phrase doit indique exactement ce que la fonction fait,
+ex: Calcule la somme de 2 chiffres (mais en anglais biensure)
+On peut utiliser des tags pour preciesr des infos en pariculier sur la fonctons, ex: le type de retour, les parametre, etc...
+Liste des tags:
+@return
+@param
+@thrown 
+
+Ex de commentaire ecrit pour la javadoc, il faut suivre ce format a la lettre
+
+   /**
+   * Gets the first and last name of this Student.
+   * @return this Student's name.
+   */
+  public String getName() {
+    return name;
+  }
+
+  /**
+   * Changes the name of this Student.
+   * This may involve a lengthy legal process.
+   * @param newName This Student's new name.  
+   *                Should include both first
+   *                and last name.
+   */
+  public void setName(String newName) {
+    name = newName;
+  }
+
+   /**
+   * Calcultate the sums of 2 numbers.
+   * @param number1 the first number.  
+   * @param number2 the  second number.
+   * @return the sum of number 1 and number2.
+   */
+  public int sum(int number1, int number2) {
+    return number1 + number2;
+  }
+
+Pour le dernier exemple, le commentaire est inutile, la fonction est trop simple.
+
+
+   *Comment choisir les noms pour les fonctions
+
+Une fonctions n'est censer faire qu'une seule operation a la fois, son nom doit donc etre assez explicite mais eviter de faire des noms a rallonge.
+Le niveau de difficulte que vous avez a trouver un nom pour une fonctions traduit le niveau de complexite de l'operation que vous essayer de realiser,
+si vous n'arrivez pas a trouver un nom tres simplement c'est que la fonctions que vous essayer d'ecrire fait probablement plus d'une operation a la fois
+donc pensez a decouper cette derniere en plusieurs. Quand l'operation reste complexe meme en etant precise, pensez a ajouter des commentaires.
+
