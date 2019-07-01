@@ -1,4 +1,4 @@
 package com.controller;
 
-public class Article {
+public class ArticleMove {
 }

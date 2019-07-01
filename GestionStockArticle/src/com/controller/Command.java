@@ -1,4 +1,4 @@
 package com.controller;
 
-public class Stock {
+public class Command {
 }
