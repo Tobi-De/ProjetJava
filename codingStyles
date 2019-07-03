@@ -20,9 +20,8 @@ Meme convention que pour les classes.
   *Variables
 Premiere lettre en miniscule, a chaque debut de mot une majuscule.
 Noms simple et descriptifs.
-Dans le cas de parametres d'une fonctions utiliser l'undescore lorsque le nom est en plusier mot "_". 
-Ex: client_name: uniquement pour les noms de parametres, la majuscule au debut de chauqe caractere n'est plus necessaires.
-    clientName: lorsque la variables est n'importe ou d'autres dans le programme(sauf pour les constantes, voir la section
+Ex:
+clientName: lorsque la variables est n'importe ou dans le programme(sauf pour les constantes, voir la section
     les concernants)
 
 NB: le prof l'a precise dans le projet, mais je le reecrit ici, pas de variable globale, ils doivent tous etres locale a une fonction.
