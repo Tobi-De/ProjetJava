@@ -49,6 +49,10 @@ public class Store {
         //auo
     }
 
+<<<<<<< HEAD
     public boolean transferArticleQuantity()
+=======
+    public boolean transferArticle
+>>>>>>> master
 
 }
