@@ -68,6 +68,10 @@ public class Store {
         return null;
     }
 
+    public ArrayList<ArticleSheet> getArticleSheetList() {
+        return articleSheetList;
+    }
+
     public int getIdOf(String articleName){
         for(int i = 0; i < this.articleSheetList.size(); i++)
             if (articleName.equals(this.articleSheetList.get(i).getArticleName())) return i;
@@ -95,6 +99,8 @@ public class Store {
             if(transferSucess){
                 articleInActualStore.removeQuantity(quantityToTransfer);
                 updateSupplyOrders(articleInActualStore);
+                articleInActualStore.getMovementHistoric().addArticleMove(new ArticleMove(quantityToTransfer, this.getId(),toStore.getId()));
+                toStore.getArticleSheet(articleName).getMovementHistoric().addArticleMove(new ArticleMove(quantityToTransfer, toStore.getId(), this.getId()));
             }
         }
       return transferSucess;
@@ -114,6 +120,9 @@ public class Store {
                 if(secondArticle.addQuantity(quantityToTransfer)) {
                     firstArticle.removeQuantity(quantityToTransfer);
                    updateSupplyOrders(firstArticle);
+                   firstArticle.getMovementHistoric().addArticleMove(new ArticleMove(quantityToTransfer, this.getId(), this.getId()));
+                   secondArticle.getMovementHistoric().addArticleMove(new ArticleMove(quantityToTransfer, this.getId(), this.getId()));
+                   return true;
                 }
         }
         return  false;
@@ -184,5 +193,17 @@ public class Store {
 
     public void clearSupplyOrderList(){
         this.listOfSuppliesOrders.clear();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public ArrayList<SupplyOrder> getListOfSuppliesOrders() {
+        return listOfSuppliesOrders;
+    }
+
+    public ArrayList<String> getListOfBookArticle() {
+        return listOfBookArticle;
     }
 }

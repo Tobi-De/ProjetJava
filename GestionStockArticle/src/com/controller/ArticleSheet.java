@@ -119,6 +119,10 @@ public class ArticleSheet {
             return false;
     }
 
+    public Historic getMovementHistoric() {
+        return movementHistoric;
+    }
+
     public ArticleSheet copy(){
         return new ArticleSheet(this.articleName, this.storeReference, this.price, this.stockNbr, this.family, this.deliveryModelType);
     }
