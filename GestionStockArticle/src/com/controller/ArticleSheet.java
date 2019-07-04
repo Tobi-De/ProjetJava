@@ -116,5 +116,9 @@ public class ArticleSheet {
         //verifiy if quantity <= actualNbrInstock
         return  true;
     }
+
+    public ArticleSheet copy(){
+        return new ArticleSheet(this.articleName, this.storeReference, this.price, this.stockNbr, this.family, this.deliveryModelType);
+    }
 }
 
