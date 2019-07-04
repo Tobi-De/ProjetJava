@@ -1,13 +1,15 @@
 package com.controller;
 
 public class VariableDeliveryModel  extends DeliveryModel{
+    private int quantityToOrder;
 
-    public VariableDeliveryModel(int stockMaximun) {
+    public VariableDeliveryModel(int stockMaximun, int quantityToOrder) {
         super(0, stockMaximun);
+        this.quantityToOrder = quantityToOrder;
     }
 
-    public SupplyOrder emitSupplyOrder(int idArticle, int nbrInStock, int quantityToOrder) {
-        return new SupplyOrder(idArticle, calculateQuantityToOrder(nbrInStock, quantityToOrder));
+    public SupplyOrder emitSupplyOrder(ArticleSheet article) {
+        return new SupplyOrder(article.getId(), calculateQuantityToOrder(article.getStockNbr()));
     }
 
     /**
@@ -15,10 +17,18 @@ public class VariableDeliveryModel  extends DeliveryModel{
      * of the number of product sill available in the stock
      */
 
-    public int calculateQuantityToOrder(int nbrInStock, int quantityToOrder){
-        if(quantityToOrder > this.stockMaximun ||(quantityToOrder + nbrInStock) > stockMaximun )
+    public int calculateQuantityToOrder(int nbrInStock){
+        if(this.quantityToOrder > this.stockMaximun ||(this.quantityToOrder + nbrInStock) > stockMaximun )
             return stockMaximun - nbrInStock;
+        return this.quantityToOrder;
+    }
+
+    public int getQuantityToOrder() {
         return quantityToOrder;
+    }
+
+    public void setQuantityToOrder(int quantityToOrder) {
+        this.quantityToOrder = quantityToOrder;
     }
 
     public String getDesciption(){

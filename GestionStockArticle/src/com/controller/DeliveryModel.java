@@ -1,6 +1,6 @@
 package com.controller;
 
-public abstract   class DeliveryModel {
+public  abstract  class DeliveryModel {
     protected int stockMinimum;
     protected int stockMaximun;
 
@@ -10,9 +10,10 @@ public abstract   class DeliveryModel {
     }
 
     public boolean isSupplyNecessary(int nbrInStock){
-
         return (nbrInStock <= this.stockMinimum);
     }
+
+    public  abstract SupplyOrder  emitSupplyOrder(ArticleSheet article);
 
     public int getStockMaximun() {
         return stockMaximun;
