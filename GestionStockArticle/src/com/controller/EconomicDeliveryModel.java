@@ -17,8 +17,8 @@ public class EconomicDeliveryModel extends  DeliveryModel {
         this.launchCommandPrice = launchCommandPrice;
     }
 
-    public  SupplyOrder  emitSupplyOrder(int idArticle,  double articlePrice, int nbrInStock){
-        return new SupplyOrder(idArticle, calculateQuantityToOrder(articlePrice, nbrInStock));
+    public  SupplyOrder  emitSupplyOrder(ArticleSheet article){
+        return new SupplyOrder(article.getId(), calculateQuantityToOrder(article.getPrice(), article.getStockNbr()));
     }
 
     /**

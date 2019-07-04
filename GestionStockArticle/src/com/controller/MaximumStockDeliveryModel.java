@@ -16,8 +16,8 @@ public class MaximumStockDeliveryModel extends DeliveryModel{
         return nbrInStock <= stockMinimum;
     }
 
-    public  SupplyOrder  emitSupplyOrder(int idArticle, int nbrInStock){
-        return new SupplyOrder(idArticle, calculateQuantityToOrder(nbrInStock));
+    public  SupplyOrder  emitSupplyOrder(ArticleSheet article){
+        return new SupplyOrder(article.getId(), calculateQuantityToOrder(article.getStockNbr()));
     }
 
     public int calculateQuantityToOrder(int nbrInStock){
