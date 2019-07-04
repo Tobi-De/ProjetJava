@@ -122,5 +122,9 @@ public class ArticleSheet {
     public ArticleSheet copy(){
         return new ArticleSheet(this.articleName, this.storeReference, this.price, this.stockNbr, this.family, this.deliveryModelType);
     }
+
+    public ArticleSheet copy(){
+        return new ArticleSheet(this.articleName, this.storeReference, this.price, this.stockNbr, this.family, this.deliveryModelType);
+    }
 }
 
