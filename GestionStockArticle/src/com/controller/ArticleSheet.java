@@ -79,23 +79,9 @@ public class ArticleSheet {
         this.deliveryModelType = deliveryModelType;
     }
 
-    public boolean quantifyTransfer(int transferToId,int quantityToTransfer) {
-        // vérifier si l'ID est valide
-        if (quantityToTransfer > this.stockNbr)
-            return false;
-        return true;
-    }
-
     public boolean isAvailable()
     {
-        if(this.stockNbr != 0 || !this.block)
-        {
-            return  true;
-        }
-        else
-        {
-            return false;
-        }
+        return  this.block;
     }
 
     public void setAvailability(boolean block)
@@ -103,18 +89,38 @@ public class ArticleSheet {
         this.block=block;
     }
 
-    public int buyArticle(int quantity){
+    public double buyArticle(int quantity){
+        if(quantity <= this.stockNbr){
+            this.removeQuantity(quantity);
+            return  quantity * this.getPrice();
+        }
         return 0;
     }
 
     public boolean addQuantity(int quantity){
         //verifiy if quantity + actualNbrInstock <= stockMax
-        return true;
+        int finalQuantity = quantity + this.stockNbr;
+        if(finalQuantity <= deliveryModelType.getStockMaximun()) {
+            this.setStockNbr(finalQuantity);
+            setAvailability(true);
+            return true;
+        }
+        return false;
     }
 
     public boolean removeQuantity(int quantity){
         //verifiy if quantity <= actualNbrInstock
-        return  true;
+        if(quantity <= this.stockNbr){
+            this.stockNbr -= quantity;
+            if(this.stockNbr <= deliveryModelType.getStockMinimum())
+                setAvailability(false);
+            return true;
+        }else
+            return false;
+    }
+
+    public ArticleSheet copy(){
+        return new ArticleSheet(this.articleName, this.storeReference, this.price, this.stockNbr, this.family, this.deliveryModelType);
     }
 }
 
