@@ -8,10 +8,6 @@ public class VariableDeliveryModel  extends DeliveryModel{
         this.quantityToOrder = quantityToOrder;
     }
 
-    public SupplyOrder emitSupplyOrder(ArticleSheet article) {
-        return new SupplyOrder(article.getId(), calculateQuantityToOrder(article.getStockNbr()));
-    }
-
     /**
      *return a value that always below the maximum stock taking account
      * of the number of product sill available in the stock
@@ -31,11 +27,20 @@ public class VariableDeliveryModel  extends DeliveryModel{
         this.quantityToOrder = quantityToOrder;
     }
 
-    public String getDesciption(){
+    public SupplyOrder emitSupplyOrder(ArticleSheet article) {
+        return new SupplyOrder(article.getId(), calculateQuantityToOrder(article.getStockNbr()));
+    }
+
+    public String getDescription(){
         String description;
         description = "Ce modele vous donne la choisir vous en meme en fonction de la periode et de vos " +
                 "prevision la quantiter qui sera reapprovisionner. Noter que vous ne pourrez pas depasser la taille" +
                 "de valeur indiquer comme stock Maximum.  ";
         return description;
+    }
+
+    @Override
+    public String getModelName() {
+        return "Modele de reapprovisionnement Variable";
     }
 }

@@ -9,6 +9,7 @@ public class Store {
     private ArrayList<String> listOfBookArticle = new ArrayList<>();
 
     public Store() {
+        this.articleSheetList = new ArrayList<>();
     }
 
     public Store(ArrayList<ArticleSheet> articleSheetList) {
@@ -18,7 +19,7 @@ public class Store {
 
     public void addArticleSheet(ArticleSheet articleSheet){
         int articleId = 0;
-        this.articleSheetList.add(articleSheet);
+        this.articleSheetList.add(articleSheet.copy());
         articleId = this.articleSheetList.size() - 1;
         this.articleSheetList.get(articleId).setId(articleId);
         this.articleSheetList.get(articleId).setStoreReference(this.id);

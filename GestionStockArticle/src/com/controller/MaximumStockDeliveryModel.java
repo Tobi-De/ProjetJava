@@ -16,14 +16,16 @@ public class MaximumStockDeliveryModel extends DeliveryModel{
         return nbrInStock <= stockMinimum;
     }
 
+    public int calculateQuantityToOrder(int nbrInStock){
+        return stockMaximun - nbrInStock;
+    }
+
+    @Override
     public  SupplyOrder  emitSupplyOrder(ArticleSheet article){
         return new SupplyOrder(article.getId(), calculateQuantityToOrder(article.getStockNbr()));
     }
 
-    public int calculateQuantityToOrder(int nbrInStock){
-            return stockMaximun - nbrInStock;
-    }
-
+@Override
     public String getDescription(){
         String description = "Ce Model offre deux options. La premiere Consiste a avoir un stock fixe pour" +
                 "votre article en ne precisant pas de valeur de stock Minimum, Le reapprovisionnement sera fait" +
@@ -31,5 +33,10 @@ public class MaximumStockDeliveryModel extends DeliveryModel{
                 "Minimum, dans ce cas le reapprovisionnement sera fait chaque fois que ce dernier est atteint. Dans" +
                 "les deux cas le reapprosisionnement ramenera le stock a sa valeur Maximum.";
         return  description;
+    }
+
+    @Override
+    public String getModelName() {
+        return "Modele de Reapprovisonnement plein";
     }
 }
