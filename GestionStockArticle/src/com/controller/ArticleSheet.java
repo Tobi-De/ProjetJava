@@ -122,5 +122,18 @@ public class ArticleSheet {
     public ArticleSheet copy(){
         return new ArticleSheet(this.articleName, this.storeReference, this.price, this.stockNbr, this.family, this.deliveryModelType);
     }
+
+    public String toString(){
+        String repr = "" +
+                "\nID: " + this.id+
+                "\nNom: " + this.articleName+
+                "\nID du Magasin de provenence: " + this.storeReference+
+                "\nPrix: " + this.price+
+                "\nFamille: " + this.family.getFamilyName()+
+                "\nModele d'approsivionnement: "+ this.deliveryModelType.getModelName()+
+                "\nDisponibilite: " + this.block+
+                "\nHistoric: " + this.movementHistoric.getHistoric();
+        return repr;
+    }
 }
 

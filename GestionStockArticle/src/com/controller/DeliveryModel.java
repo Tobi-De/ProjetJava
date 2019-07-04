@@ -13,8 +13,6 @@ public  abstract  class DeliveryModel {
         return (nbrInStock <= this.stockMinimum);
     }
 
-    public  abstract SupplyOrder  emitSupplyOrder(ArticleSheet article);
-
     public int getStockMaximun() {
         return stockMaximun;
     }
@@ -30,5 +28,8 @@ public  abstract  class DeliveryModel {
     public void setStockMinimum(int stockMinimum) {
         this.stockMinimum = stockMinimum;
     }
+    public  abstract SupplyOrder  emitSupplyOrder(ArticleSheet article);
+    public abstract String getDescription();
+    public abstract String getModelName();
 
 }

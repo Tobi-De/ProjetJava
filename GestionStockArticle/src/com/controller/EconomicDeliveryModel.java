@@ -17,10 +17,6 @@ public class EconomicDeliveryModel extends  DeliveryModel {
         this.launchCommandPrice = launchCommandPrice;
     }
 
-    public  SupplyOrder  emitSupplyOrder(ArticleSheet article){
-        return new SupplyOrder(article.getId(), calculateQuantityToOrder(article.getPrice(), article.getStockNbr()));
-    }
-
     /**
      * @return the quantity to order using the wilson formula
      */
@@ -28,10 +24,21 @@ public class EconomicDeliveryModel extends  DeliveryModel {
         return (int)Math.sqrt(2* this.totalUnitPerYear  * this.launchCommandPrice / (articlePrice * nbrInStock));
     }
 
+    @Override
+    public  SupplyOrder  emitSupplyOrder(ArticleSheet article){
+        return new SupplyOrder(article.getId(), calculateQuantityToOrder(article.getPrice(), article.getStockNbr()));
+    }
+
+    @Override
     public String getDescription() {
         String description = "Ce modele vous permet de calculer automatiquement la quantiter a reapprovisionner" +
                 "dans le but d'optimiser le cout du stockage. Elle vous permet de faire le minimum de commandes" +
                 "pour votre article et d'obtenir le cout de stockage optimal pour ce meme article.";
         return description;
+    }
+
+    @Override
+    public String getModelName() {
+        return "Modele de reapprovisonnement Economique";
     }
 }
