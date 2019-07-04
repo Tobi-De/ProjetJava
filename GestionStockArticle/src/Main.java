@@ -11,6 +11,7 @@ public class Main {
         testStore.addArticleSheet(banane);
         testStore.addArticleSheet(pomme);
         //testStore.editArticleSheet("pomme",banane);
-        System.out.println(testStore.getArticleSheet("banane"));
+        testStore.removeAllArticleSheet();
+        System.out.println(testStore.isArticleSheetInStore("banane"));
     }
 }
