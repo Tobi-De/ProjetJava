@@ -34,4 +34,11 @@ public class ArticleMove {
     public void setFromStoreId(int fromStoreId) {
         this.fromStoreId = fromStoreId;
     }
+
+    public  String toString(){
+        String repr = "\nProvenence: " + this.getFromStoreId() +
+                "\nDestination: " + this.getToStoreId() +
+                "\nQuantiter Transferer: " + this.getQuantityTransfer();
+        return  repr;
+    }
 }

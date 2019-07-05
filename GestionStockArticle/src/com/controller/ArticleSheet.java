@@ -129,10 +129,11 @@ public class ArticleSheet {
 
     public String toString(){
         String repr = "" +
-                "\nID: " + this.id+
+                "\n\nID: " + this.id+
                 "\nNom: " + this.articleName+
                 "\nID du Magasin de provenence: " + this.storeReference+
                 "\nPrix: " + this.price+
+                "\nNbr en Stock: " + this.stockNbr +
                 "\nFamille: " + this.family.getFamilyName()+
                 "\nModele d'approsivionnement: "+ this.deliveryModelType.getModelName()+
                 "\nDisponibilite: " + this.available+

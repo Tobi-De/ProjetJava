@@ -4,15 +4,18 @@ import java.util.ArrayList;
 
 public class Store {
     private int id = 0;
+    private String storeName;
     private ArrayList<ArticleSheet> articleSheetList;
     private ArrayList<SupplyOrder> listOfSuppliesOrders = new ArrayList<>();
     private ArrayList<ArticleReservation> listOfBookArticle = new ArrayList<>();
 
-    public Store() {
+    public Store(String storeName) {
         this.articleSheetList = new ArrayList<>();
+        this.storeName = storeName;
     }
 
-    public Store(ArrayList<ArticleSheet> articleSheetList) {
+    public Store(String storeName, ArrayList<ArticleSheet> articleSheetList) {
+        this.storeName = storeName;
         this.articleSheetList = new ArrayList<>();
         this.articleSheetList = articleSheetList;
     }
@@ -193,7 +196,6 @@ public class Store {
                 break;
             }
         }
-
     }
 
     public void clearSupplyOrderList(){
@@ -204,6 +206,17 @@ public class Store {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
 
     public ArrayList<ArticleSheet> getListOfArticleSheet() {
         return articleSheetList;
@@ -215,5 +228,13 @@ public class Store {
 
     public ArrayList<ArticleReservation> getListOfBookArticle() {
         return listOfBookArticle;
+    }
+
+    public String toString(){
+        String repr = "\n\nNom du Magasin: " + this.storeName +
+                "\nListe des articles: " + this.getListOfArticleSheet() +
+                "\nArticle a Reapprovisionner: " + this.getListOfSuppliesOrders()+
+                "\nArticle Reserver:  " + this.getListOfBookArticle();
+        return repr;
     }
 }

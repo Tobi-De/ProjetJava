@@ -7,6 +7,11 @@ public class ArticleFamily {
     private String description;
     private static ArrayList<ArticleFamily> families = new ArrayList<>();
 
+    public ArticleFamily(String familyName){
+        this.familyName = familyName;
+        this.description = "";
+        families.add(this);
+    }
     public ArticleFamily(String familyName, String description){
         this.familyName = familyName;
         this.description = description;
