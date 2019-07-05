@@ -15,11 +15,11 @@ public class SupplyOrder {
         this.neededQuantity = neededQuantity;
     }
 
-    public int getNeededQuantity(){
-        return this.neededQuantity;
-    }
-
     public int getArticleId() {
         return articleId;
+    }
+
+    public int getNeededQuantity(){
+        return this.neededQuantity;
     }
 }

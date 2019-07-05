@@ -8,7 +8,7 @@ public class ArticleSheet {
     private int stockNbr;
     private ArticleFamily family;
     private DeliveryModel deliveryModelType;
-    private boolean block;
+    private boolean available;
     private Historic movementHistoric;
 
     public ArticleSheet(String articleName, int storeReference, double price, int stockNbr, ArticleFamily family, DeliveryModel deliveryModelType) {
@@ -19,7 +19,7 @@ public class ArticleSheet {
         this.stockNbr = stockNbr;
         this.family = family;
         this.deliveryModelType = deliveryModelType;
-        this.block=false;
+        this.available=true;
         this.movementHistoric=new Historic();
     }
 
@@ -81,12 +81,12 @@ public class ArticleSheet {
 
     public boolean isAvailable()
     {
-        return  this.block;
+        return  this.available;
     }
 
-    public void setAvailability(boolean block)
+    public void setAvailability(boolean availability)
     {
-        this.block=block;
+        this.available=availability;
     }
 
     public double buyArticle(int quantity){
@@ -135,7 +135,7 @@ public class ArticleSheet {
                 "\nPrix: " + this.price+
                 "\nFamille: " + this.family.getFamilyName()+
                 "\nModele d'approsivionnement: "+ this.deliveryModelType.getModelName()+
-                "\nDisponibilite: " + this.block+
+                "\nDisponibilite: " + this.available+
                 "\nHistoric: " + this.movementHistoric.getHistoric();
         return repr;
     }

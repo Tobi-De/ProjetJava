@@ -6,7 +6,7 @@ public class Store {
     private int id = 0;
     private ArrayList<ArticleSheet> articleSheetList;
     private ArrayList<SupplyOrder> listOfSuppliesOrders = new ArrayList<>();
-    private ArrayList<String> listOfBookArticle = new ArrayList<>();
+    private ArrayList<ArticleReservation> listOfBookArticle = new ArrayList<>();
 
     public Store() {
         this.articleSheetList = new ArrayList<>();
@@ -27,8 +27,8 @@ public class Store {
 
     public boolean editArticleSheet(String articleName, ArticleSheet newArticleSheetData){
         if(isArticleSheetInStore(articleName)){
-            int artilceId = getIdOf(articleName);
-            this.articleSheetList.set(artilceId, newArticleSheetData);
+            int articleId = getIdOf(articleName);
+            this.articleSheetList.set(articleId, newArticleSheetData);
             return true;
         }
         return false;
@@ -36,8 +36,8 @@ public class Store {
 
     public boolean isArticleSheetInStore(String articleName){
         int articleId = getIdOf(articleName);
-        if(articleId < this.articleSheetList.size()) return  true;
-        return false;
+        if(articleId == -1) return false;
+        return articleId < this.articleSheetList.size();
     }
 
     public void removeArticleSheet(String articleName){
@@ -68,10 +68,6 @@ public class Store {
         return null;
     }
 
-    public ArrayList<ArticleSheet> getArticleSheetList() {
-        return articleSheetList;
-    }
-
     public int getIdOf(String articleName){
         for(int i = 0; i < this.articleSheetList.size(); i++)
             if (articleName.equals(this.articleSheetList.get(i).getArticleName())) return i;
@@ -83,6 +79,7 @@ public class Store {
         boolean transferSucess  = false;
         //transferSucess = false;
         ArticleSheet articleInActualStore = this.getArticleSheet(articleName);
+        if(articleInActualStore == null) return false;
         if(!articleInActualStore.isAvailable())  return false;
 
         if(quantityToTransfer <= articleInActualStore.getStockNbr()){
@@ -92,7 +89,7 @@ public class Store {
                 // if article exist in the other store, make the transfer
                 transferSucess =  articleSheetInToStore.addQuantity(quantityToTransfer);
             }else{
-                toStore.addArticleSheet(this.getArticleSheet(articleName).copy());
+                toStore.addArticleSheet(articleInActualStore.copy());
                 toStore.getArticleSheet(articleName).setStockNbr(quantityToTransfer);
                 transferSucess = true;
             }
@@ -111,7 +108,8 @@ public class Store {
         ArticleSheet secondArticle = getArticleSheet(secondArticleName);
 
         //verify is both article exist
-        if(firstArticle ==null  || secondArticle == null) return false;
+        if(firstArticle == null  || secondArticle == null) return false;
+
         //verify is the article to transfer is available
         if(!firstArticle.isAvailable()) return false;
 
@@ -139,12 +137,12 @@ public class Store {
         return true;
     }
 
-    public boolean bookAnArticle(String articleName, int quantity){
-        ArticleSheet article = getArticleSheet(articleName);
-        if(isArticleSheetInStore(articleName)){
+    public boolean bookAnArticle(ArticleReservation articleReservation){
+        ArticleSheet article = getArticleSheet(articleReservation.getArticleId());
+        if(isArticleSheetInStore(article.getArticleName())){
             if(article.isAvailable()){
-                if(article.removeQuantity(quantity)){
-                    this.listOfBookArticle.add(article.getArticleName());
+                if(article.removeQuantity(articleReservation.getQuantityBook())){
+                    this.listOfBookArticle.add(articleReservation);
                     updateSupplyOrders(article);
                 }
                 return false;
@@ -156,7 +154,14 @@ public class Store {
 
     public void removeArticleFromBookList(String articleName){
         if(isArticleSheetInStore(articleName))
-            this.listOfBookArticle.remove(getIdOf(articleName));
+            if(this.listOfBookArticle.size() >=1){
+                for(int i = 0; i < this.listOfBookArticle.size(); i++){
+                    if(this.listOfBookArticle.get(i).getArticleId() == getIdOf(articleName)) {
+                        this.listOfBookArticle.remove(i);
+                        break;
+                    }
+                }
+            }
     }
 
     public void clearBookArticlesList(){
@@ -199,11 +204,16 @@ public class Store {
         return id;
     }
 
+
+    public ArrayList<ArticleSheet> getListOfArticleSheet() {
+        return articleSheetList;
+    }
+
     public ArrayList<SupplyOrder> getListOfSuppliesOrders() {
         return listOfSuppliesOrders;
     }
 
-    public ArrayList<String> getListOfBookArticle() {
+    public ArrayList<ArticleReservation> getListOfBookArticle() {
         return listOfBookArticle;
     }
 }
